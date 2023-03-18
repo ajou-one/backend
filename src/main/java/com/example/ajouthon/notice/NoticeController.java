@@ -16,8 +16,15 @@ public class NoticeController {
     private final NoticeService noticeService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Notice>> getRangedNotice(@RequestParam("start") int start, @RequestParam("end") int end){
-
-        return new ResponseEntity<>(noticeService.getRangedNotice(start, end), HttpStatus.OK);
+    public ResponseEntity<ResponseDto> getRangedNotice(@RequestParam("start") int start, @RequestParam("end") int end, @RequestParam("page") int page){
+        List<Notice> notices = noticeService.getRangedNotice(start, end, page);
+        int totalNumber = noticeService.getPageCntOfSource(start, end);
+        return new ResponseEntity<>(ResponseDto.of(notices, totalNumber), HttpStatus.OK);
+    }
+        @GetMapping("/recent")
+    public ResponseEntity<ResponseDto> getRecentNotice(@RequestParam("page") int page){
+        List<Notice> notices = noticeService.getRecentNotice(page);
+        int totalNumber = noticeService.getPageCntOfRecent();
+        return new ResponseEntity<>(ResponseDto.of(notices, totalNumber), HttpStatus.OK);
     }
 }
