@@ -1,5 +1,8 @@
-package com.example.ajouthon.notice;
+package com.example.ajouthon.notice.controller;
 
+import com.example.ajouthon.notice.service.NoticeService;
+import com.example.ajouthon.notice.domain.ResponseDto;
+import com.example.ajouthon.notice.domain.Notice;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +24,7 @@ public class NoticeController {
         int totalNumber = noticeService.getPageCntOfSource(start, end);
         return new ResponseEntity<>(ResponseDto.of(notices, totalNumber), HttpStatus.OK);
     }
-        @GetMapping("/recent")
+    @GetMapping("/recent")
     public ResponseEntity<ResponseDto> getRecentNotice(@RequestParam("page") int page){
         List<Notice> notices = noticeService.getRecentNotice(page);
         int totalNumber = noticeService.getPageCntOfRecent();

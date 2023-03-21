@@ -1,6 +1,8 @@
-package com.example.ajouthon.notice;
+package com.example.ajouthon.notice.service;
 
 
+import com.example.ajouthon.notice.domain.Notice;
+import com.example.ajouthon.notice.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,8 @@ public class NoticeService {
         return query.getResultList();
     }
     public int getPageCntOfSource(int start, int end){
-        return (noticeRepository.findBetweenSource(start, end).size() - 1)/10 + 1;
+        int size = noticeRepository.findBetweenSource(start, end).size();
+        return (size - 1)/10 + 1;
     }
 
     public List<Notice> getRecentNotice(int page) {
@@ -37,6 +40,7 @@ public class NoticeService {
     public int getPageCntOfRecent(){
         TypedQuery<Notice> query = em.createQuery("SELECT n FROM Notice n WHERE n.age = :new", Notice.class);
         query.setParameter("new","new");
-        return (query.getResultList().size() - 1)/10 + 1;
+        int size = query.getResultList().size();
+        return (size - 1)/10 + 1;
     }
 }

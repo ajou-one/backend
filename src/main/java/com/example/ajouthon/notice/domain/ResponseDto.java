@@ -1,4 +1,4 @@
-package com.example.ajouthon.notice;
+package com.example.ajouthon.notice.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +26,7 @@ public class ResponseDto {
 class Item{
     private String url;
     private String title;
-    private int classify_code;
+    private Long classify_code;
 }
 
 @Data

@@ -1,4 +1,4 @@
-package com.example.ajouthon.notice;
+package com.example.ajouthon.notice.domain;
 
 import lombok.Data;
 
@@ -9,13 +9,13 @@ import javax.persistence.Id;
 @Data
 public class Notice {
     @Id
-    private int id;
+    private Long id;
 
     private String url;
 
     private String title;
 
-    private int classify_code;
+    private Long classify_code;
 
     private String age;
 }
